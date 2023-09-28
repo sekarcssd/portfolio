@@ -1,0 +1,56 @@
+import React, { useState } from 'react';
+import "./styles.css";
+
+export default function App() {
+  const [firstName,setFirstName] = useState("");
+  const [lastName,setLastName] = useState("");
+  const [email,setEmail] = useState("");
+  const [error,setError] = useState("");
+
+  const updateFirstName =(e)=>{
+    setFirstName(e.target.value);
+  }
+
+  const updateLastName =(e)=>{
+    setLastName(e.target.value);
+  }
+
+  const updateEmailAddress =(e)=>{
+    setEmail(e.target.value);
+  }
+
+  const validateForm=()=>{
+     if(firstName === "" || lastName === "" || email === ""){
+      let errorMsg = "";
+      if(firstName === ""){
+        errorMsg = `First Name should not empty,`;
+      }
+      if(lastName === ""){
+        errorMsg +=`Last Name should not empty,`;
+      }
+      if(email === ""){
+        errorMsg +=`Email Address should not empty`;
+      }
+      setError(errorMsg);
+     }else{
+      setError("")
+     }
+
+  }
+
+  return (
+    <div>
+     
+        <label> Error:{error}</label><br/>
+        <label> First Name: {firstName}</label><br/>
+         <input type="text" value={firstName} onChange={updateFirstName}/><br/>
+         <label> Last Name: {lastName} </label><br/>
+         <input type="text" value={lastName} onChange={updateLastName} /><br/>
+         <label> Email: </label><br/>
+         <input type="email" value={email} onChange={updateEmailAddress}/><br/>
+         <button onClick={validateForm}>Submit</button>
+     
+
+    </div>
+  )
+}
